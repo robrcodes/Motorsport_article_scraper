@@ -6,7 +6,7 @@ import requests
 # initial website address to scrape
 website = 'https://www.speedcafe.com/'
 result = requests.get(website)
-content = result.text
+content = result.content
 
 # parse html into soup object
 soup = bs(content, 'lxml')
@@ -22,7 +22,7 @@ page_link = mb_title.find('a', class_='animate').get('href')
 
 # scrape the page content of the featured article
 feature_result = requests.get(page_link)
-feature_content = feature_result.text
+feature_content = feature_result.content
 feature_soup = bs(feature_content, 'lxml')
 
 # identify and focus scraping to article entry on the page
