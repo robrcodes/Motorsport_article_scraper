@@ -2,8 +2,8 @@ from bs4 import BeautifulSoup as bs
 import requests
 from datetime import datetime
 
-# get today's date to add to bottome of article text file
-today_date = datetime.today()
+# get today's local date to add to bottome of article text file
+today_date = datetime.now()
 
 # required: bs4, requests, lxml
 
