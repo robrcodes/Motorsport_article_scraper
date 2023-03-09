@@ -48,8 +48,13 @@ mydate = published_date.get_text().replace('th', '').replace(',','').replace('- 
 # create date object from text date
 dateobj = datetime.strptime(mydate, format)
 
+# find news category to prefix txt file name
+news_category = feature_soup.select('body > div.contentContainer.mainContent > div > div.content.outerContent > div.breadcrumbContainer.js-breadcrumbContainer > p > span > span:nth-child(3)')
+news_cat = news_category[0].get_text()
+
+
 # write the list of the article content into a text file using a loop to add each list element
-with open(f'{dateobj.date()}-{dateobj.time()}-{mb_title.get_text()[0:20]}.txt', 'w') as file:
+with open(f'{dateobj.date()}-{dateobj.time()}-{news_cat}.txt', 'w') as file:
     file.write(mb_title.get_text().upper())
     for para in feature_article:
         # write each line into file
@@ -58,6 +63,6 @@ with open(f'{dateobj.date()}-{dateobj.time()}-{mb_title.get_text()[0:20]}.txt', 
     # add today's date at bottom of article text file
     file.write('Extracted: ')
     file.write("%s\n\n" % today_date)
-    
+
     # close the file once complete
     file.close()
